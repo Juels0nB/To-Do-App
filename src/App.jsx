@@ -19,7 +19,7 @@ function App() {
       description: "Create a simple To-Do application using React",
       priority: "Medium",
       dueDate: "2025-07-20",
-      iscompleted: false,
+      iscompleted: true,
     },
     {
       id: 3,
@@ -27,10 +27,25 @@ function App() {
       description: "Understand the basics of Tailwind CSS for styling",
       priority: "Low",
       dueDate: "2025-08-15",
-      iscompleted: false,
+      iscompleted: true,
     },
   ]);
 
+  function onTaskClick(taskId) {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, iscompleted: !task.iscompleted };
+      }
+      return task;
+    });
+    setTask(updatedTasks);
+    
+  }
+
+  function onDeleteTaskClick(taskId) {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTask(updatedTasks);
+  }
   return (
     <div className="w-screen h-screen  bg-gray-500 flex justify-center p6">
       <div className="w-[500px]">
@@ -41,7 +56,7 @@ function App() {
         <h1 className="text-2xl text-center text-slate-100 font-mono">
           My tasks
         </h1>
-        <Tasks tasks={tasks} />
+        <Tasks tasks={tasks} onTaskClick={onTaskClick} onDeleteTaskClick={onDeleteTaskClick} />
       </div>
     </div>
   );
