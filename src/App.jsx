@@ -42,21 +42,35 @@ function App() {
     
   }
 
+  function onAddTaskSubmit(title, description, priority, dueDate) {
+    const newTask = {
+      id: tasks.length + 1,
+      title,
+      description,
+      priority,
+      dueDate,
+      iscompleted: false,
+    };
+    setTask([...tasks, newTask]);
+
+
+  }
+
   function onDeleteTaskClick(taskId) {
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
     setTask(updatedTasks);
   }
   return (
     <div className="w-screen h-screen  bg-gray-500 flex justify-center p6">
-      <div className="w-[500px]">
+      <div className="w-[500px] space-y-4">
         <h1 className="text-3xl text-center text-slate-100 font-mono">
           Go do it
         </h1>
-        <AddTask setTask={setTask}/>
+        <AddTask setTask={setTask} onAddTaskSubmit={onAddTaskSubmit}/>
         <h1 className="text-2xl text-center text-slate-100 font-mono">
           My tasks
         </h1>
-        <Tasks tasks={tasks} onTaskClick={onTaskClick} onDeleteTaskClick={onDeleteTaskClick} />
+        <Tasks tasks={tasks} onTaskClick={onTaskClick} onDeleteTaskClick={onDeleteTaskClick}  />
       </div>
     </div>
   );
