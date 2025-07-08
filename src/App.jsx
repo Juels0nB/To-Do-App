@@ -1,6 +1,8 @@
 import "./App.css";
 import Tasks from "./components/Tasks";
+
 import AddTask from "./components/AddTask";
+import {v4} from "uuid";
 import { useState } from "react";
 
 function App() {
@@ -44,7 +46,7 @@ function App() {
 
   function onAddTaskSubmit(title, description, priority, dueDate) {
     const newTask = {
-      id: tasks.length + 1,
+      id: v4() ,
       title,
       description,
       priority,
@@ -66,7 +68,7 @@ function App() {
         <h1 className="text-3xl text-center text-slate-100 font-mono">
           Go do it
         </h1>
-        <AddTask setTask={setTask} onAddTaskSubmit={onAddTaskSubmit}/>
+        <AddTask onAddTaskSubmit={onAddTaskSubmit}/>
         <h1 className="text-2xl text-center text-slate-100 font-mono">
           My tasks
         </h1>
